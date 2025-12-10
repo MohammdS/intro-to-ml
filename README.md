@@ -1,45 +1,112 @@
-# Machine Learning Algorithms From Scratch
+# Intro to Machine Learning (From Scratch)
 
-A comprehensive collection of fundamental machine learning algorithms implemented purely in **Python** and **NumPy**. 
+A collection of fundamental Machine Learning algorithms implemented using **pure Python**, **NumPy**, and **Pandas**.
+
+The goal is to demonstrate a strong understanding of the mathematical foundations of ML by building models **without** high-level ML frameworks. Scikit-Learn is used only for helper tasks such as dataset splitting, PCA visualization, and metric evaluation.
 
 
-## 🧠 Implemented Models
+## 🧠 Implemented Algorithms
 
-### 1. Linear Regression (`linearReg.py`)
-* **Closed-Form Solution:** Implemented using the Normal Equation $(X^T X)^{-1} X^T y$.
-* **Robust Outlier Detection:** Features a dynamic cleaning mechanism using the **Interquartile Range (IQR)** method to automatically detect and remove anomalies.
-* **3D Visualization:** Includes 3D plotting of the regression plane against data points.
+### 1. Linear Regression (`linear_regression.py`)
 
-### 2. Bayesian Classifiers (`GB_GNB_classifiers.py`)
-* **Gaussian Naïve Bayes (GNB):** Assumes feature independence. Optimized for high-dimensional data.
-* **Gaussian Bayes (GB):** Models feature covariance. Includes **regularization techniques** (epsilon addition) to handle singular covariance matrices.
-* **Analysis:** Includes correlation matrix visualization and PCA-based decision boundary plotting.
+Implements linear regression using the **Closed-Form Solution**:
+
+\[
+w = (X^T X)^{-1} X^T y
+\]
+
+**Features:**
+- IQR-based outlier detection and removal  
+- MSE and R² performance evaluation  
+- 3D visualization of the regression plane (before and after cleaning)
+
+---
+
+### 2. Bayesian Decision Rule (`bayesian_decision_rule.py`)
+
+Probabilistic classification using Bayes’ theorem.
+
+**Included Models:**
+- **Gaussian Naïve Bayes (GNB):** Assumes feature independence (diagonal covariance)  
+- **Gaussian Bayes (GB):** Full covariance matrix to capture feature correlations  
+  - Uses covariance inverse (Mahalanobis-like behavior)  
+  - Includes epsilon regularization for singular matrices  
+
+**Extras:**
+- Feature correlation heatmaps for dataset interpretation
+
+---
 
 ### 3. Text Classification (`naive_bayes_text.py`)
-* **Bag-of-Words Model:** A full NLP pipeline implementing Naïve Bayes for text categorization.
-* **Log-Probability Optimization:** Implemented using log-sum-exp tricks to prevent numerical underflow in long documents.
-* **Laplace Smoothing:** Handles unseen words in the test set robustly.
+
+Bag-of-Words text classification using **Multinomial Naïve Bayes**.
+
+**Techniques:**
+- Log-probability computations to avoid underflow  
+- Laplace smoothing to handle unseen words  
+- Trains on a small news dataset (`text_clarification_train.csv`)
+
+---
 
 ### 4. K-Nearest Neighbors (`knn_digits.py`)
-* **Digit Recognition:** Applied to the sklearn Digits dataset.
-* **Custom Distance Metrics:** Flexible implementation supporting:
-    * **Euclidean:** Standard L2 distance.
-    * **Manhattan:** L1 distance (robust to high dimensions).
-    * **Cosine:** Angle-based distance (effective for image/text vectors).
-    * **Mahalanobis:** Covariance-aware distance.
+
+Non-parametric classifier applied to **8×8 handwritten digits**.
+
+**Distance Metrics:**
+- Euclidean  
+- Manhattan  
+- Cosine similarity  
+
+---
 
 ## 🚀 Getting Started
 
 ### Prerequisites
-* Python 3.8+
-* NumPy
-* Pandas
-* Matplotlib
-* Scikit-Learn (used only for data loading, splitting, and PCA)
+- Python 3.8+
+- NumPy  
+- Pandas  
+- Matplotlib  
+- Scikit-Learn  
 
 ### Installation
 
 ```bash
-git clone [https://github.com/YOUR_USERNAME/ml-algorithms-from-scratch.git](https://github.com/YOUR_USERNAME/ml-algorithms-from-scratch.git)
-cd ml-algorithms-from-scratch
+git clone https://github.com/YOUR_USERNAME/intro-to-ml.git
+cd intro-to-ml
+```
+
+Install dependencies:
+
+```bash
 pip install numpy pandas matplotlib scikit-learn
+```
+
+---
+
+## ▶️ Usage
+
+Run any script:
+
+```bash
+# Linear Regression
+python linear_regression.py
+
+# Text Classification
+python naive_bayes_text.py
+
+# Digit Recognition (KNN)
+python knn_digits.py
+```
+
+Make sure the `data/` folder exists at the project root.
+
+
+## 🤝 Contributing
+
+Pull requests and issue submissions are welcome.
+
+---
+
+## 📝 License
+
+This project is open-source under the **MIT License**.
