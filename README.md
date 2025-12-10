@@ -7,7 +7,7 @@ The goal is to demonstrate a strong understanding of the mathematical foundation
 
 ## 🧠 Implemented Algorithms
 
-### 1. Linear Regression (`linearReg.py`)
+### Linear Regression (`linearReg.py`)
 
 Implements linear regression using the **Closed-Form Solution**:
 
@@ -22,7 +22,7 @@ w = (X^T X)^{-1} X^T y
 
 ---
 
-### 2. Bayesian Decision Rule (`GB_GNB_classifiers.py`)
+### Bayesian Decision Rule (`GB_GNB_classifiers.py`)
 
 Probabilistic classification using Bayes’ theorem.
 
@@ -37,7 +37,7 @@ Probabilistic classification using Bayes’ theorem.
 
 ---
 
-### 3. Text Classification (`naive_bayes_text.py`)
+### Text Classification (`naive_bayes_text.py`)
 
 Bag-of-Words text classification using **Multinomial Naïve Bayes**.
 
@@ -48,7 +48,7 @@ Bag-of-Words text classification using **Multinomial Naïve Bayes**.
 
 ---
 
-### 4. K-Nearest Neighbors (`knn.py`)
+### K-Nearest Neighbors (`knn.py`)
 
 Non-parametric classifier applied to **8×8 handwritten digits**.
 
