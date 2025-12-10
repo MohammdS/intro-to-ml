@@ -2,77 +2,42 @@
 
 A collection of fundamental Machine Learning algorithms implemented using **pure Python**, **NumPy**, and **Pandas**.
 
-The goal of this repository is to demonstrate a strong understanding of the mathematical foundations of ML by building models **without** relying on high-level frameworks like PyTorch or TensorFlow for the core logic. Scikit-Learn is used only for auxiliary tasks such as dataset splitting, PCA visualization, and metric evaluation.
+This repository builds core ML models from the ground up without relying on high-level frameworks like PyTorch or TensorFlow for the core logic. Scikit-Learn is used only for auxiliary tasks such as data splitting and visualization.
 
 ## 🧠 Implemented Algorithms
 
 ### 1\. Linear Regression (`linearReg.py`)
 
-A statistical approach to modeling the relationship between a scalar response and one or more explanatory variables using the **Closed-Form Solution** (Normal Equation).
+A statistical model that predicts a target value by fitting the best straight plane through the data points.
 
-**The Math:**
-We minimize the Ordinary Least Squares (OLS) cost function by solving for weights $w$ directly:
-$$w = (X^T X)^{-1} X^T y$$
-
-**Key Techniques:**
-
-  * **IQR Outlier Detection:** We use the Interquartile Range to filter noise.
-      * $IQR = Q3 - Q1$
-      * Bounds: $[Q1 - 1.5 \cdot IQR, \ Q3 + 1.5 \cdot IQR]$
-  * **Evaluation:**
-      * **MSE:** Mean Squared Error ($\frac{1}{n}\sum(y - \hat{y})^2$)
-      * **$R^2$:** Coefficient of determination ($1 - \frac{SS_{res}}{SS_{tot}}$)
-
------
+  * **Technique:** Uses the **Closed-Form Solution** (Normal Equation) to calculate exact weights instantly, rather than iterative approximation.
+  * **Outlier Detection:** Implements **Interquartile Range (IQR)** logic to automatically identify and remove data points that are statistically far from the norm, ensuring a more robust model.
+  * **Evaluation:** Tracks Mean Squared Error (MSE) and R² scores to measure fit quality.
 
 ### 2\. Bayesian Decision Rule (`GB_GNB_classifiers.py`)
 
-Probabilistic classifiers based on applying **Bayes' Theorem**:
-$$P(C|x) = \frac{P(x|C)P(C)}{P(x)}$$
+Probabilistic classifiers that predict the class with the highest probability given the input features.
 
-**Included Models:**
-
-  * **Gaussian Naïve Bayes (GNB):**
-      * **Assumption:** Features are statistically independent.
-      * **Math:** The Covariance Matrix $\Sigma$ is diagonal (off-diagonal elements are 0). This simplifies calculations but ignores feature interactions.
-  * **Gaussian Bayes (GB):**
-      * **Assumption:** Features may be correlated.
-      * **Math:** Uses the **Full Covariance Matrix**. The likelihood is calculated using the multivariate Gaussian PDF:
-        $$f(x) = \frac{1}{\sqrt{(2\pi)^k |\Sigma|}} \exp\left(-\frac{1}{2}(x-\mu)^T \Sigma^{-1} (x-\mu)\right)$$
-      * **Regularization:** Adds a small epsilon ($\epsilon I$) to $\Sigma$ to prevent singular matrix errors during inversion.
-
------
+  * **Gaussian Naïve Bayes (GNB):** Assumes all features are independent. It simplifies calculation by only looking at the variance of each feature individually.
+  * **Gaussian Bayes (GB):** A more complex model that considers how features correlate with each other using the **Full Covariance Matrix**. It implicitly calculates distances based on the shape of the data distribution (Mahalanobis distance).
+  * **Visualization:** Includes correlation matrices to visualize feature dependencies.
 
 ### 3\. Text Classification (`naive_bayes_text.py`)
 
-A Natural Language Processing (NLP) pipeline using **Multinomial Naïve Bayes** on a Bag-of-Words representation.
+A Natural Language Processing (NLP) tool that classifies news articles using the **Multinomial Naïve Bayes** algorithm.
 
-**The Math:**
-
-  * **Log-Space Calculation:** To prevent arithmetic underflow (multiplying many tiny probabilities results in 0), we sum logarithms instead:
-    $$\hat{y} = \text{argmax} \left( \log P(C) + \sum \log P(w_i | C) \right)$$
-  * **Laplace Smoothing:** Handles the "zero-frequency problem" (words in the test set that were never seen in the training set) by adding a small count $\alpha=1$:
-    $$P(w|C) = \frac{\text{count}(w, C) + 1}{\text{count}(C) + |V|}$$
-
------
+  * **Bag-of-Words:** Converts text into numerical word counts.
+  * **Log-Probabilities:** performs calculations in "log-space" to prevent numerical errors when handling very small probabilities associated with rare words.
+  * **Laplace Smoothing:** Handles unseen words in the test data by ensuring no probability is ever exactly zero.
 
 ### 4\. K-Nearest Neighbors (`knn.py`)
 
-A non-parametric, lazy learning classifier applied to **8×8 handwritten digits** (64-dimensional feature space).
+A "lazy learning" classifier applied to **Handwritten Digit Recognition** (8x8 pixel images). It classifies new digits by comparing them to the database of known digits.
 
-**The Logic:**
-The model classifies a new data point $x$ by finding the $k$ training examples closest to it and taking a majority vote of their labels.
-
-**Distance Metrics Implemented:**
-
-  * **Euclidean ($L_2$):** Standard straight-line distance.
-    $$d(x, y) = \sqrt{\sum (x_i - y_i)^2}$$
-  * **Manhattan ($L_1$):** Sum of absolute differences (robust in high dimensions).
-    $$d(x, y) = \sum |x_i - y_i|$$
-  * **Cosine Similarity:** Measures the angle between vectors (ignores magnitude/intensity).
-    $$d(x, y) = 1 - \frac{x \cdot y}{\|x\| \|y\|}$$
-
------
+  * **Distance Metrics:**
+      * **Euclidean:** Measures the straight-line distance between images (pixel intensity).
+      * **Manhattan:** Measures distance along axes, often more robust in high dimensions.
+      * **Cosine Similarity:** Measures the *angle* between image vectors, focusing on the shape pattern rather than pixel brightness.
 
 ## 🚀 Getting Started
 
@@ -82,7 +47,7 @@ The model classifies a new data point $x$ by finding the $k$ training examples c
   * NumPy
   * Pandas
   * Matplotlib
-  * Scikit-Learn (for data splitting/PCA only)
+  * Scikit-Learn (for data tools only)
 
 ### Installation
 
@@ -102,7 +67,7 @@ pip install numpy pandas matplotlib scikit-learn
 Ensure your datasets are located in a `data/` folder at the project root.
 
 ```bash
-# Linear Regression
+# Linear Regression Analysis
 python linearReg.py
 
 # Bayesian Classifiers
